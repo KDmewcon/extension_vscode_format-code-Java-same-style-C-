@@ -1,5 +1,25 @@
 # Change Log
 
+## [1.9.0] - 2024-12-19
+
+### 🛡️ Critical Fix - String Literal Protection
+- **FIXED**: Nội dung trong string literals (`"..."`) và character literals (`'...'`) không bị sửa đổi
+- **FIXED**: `"This has + + inside"` giữ nguyên không đổi thành `"This has ++ inside"`
+- **FIXED**: `"Don't change = = this"` giữ nguyên không đổi thành `"Don't change == this"`
+- **FIXED**: Escaped strings `"Quote \" and + + operators"` được xử lý đúng
+- **FIXED**: File paths `"C:\\folder\\file + +.txt"` không bị thay đổi
+
+### 🔧 Technical Implementation
+- **Added**: String literal extraction và protection mechanism
+- **Added**: Character literal protection
+- **Added**: Escaped character handling trong strings
+- **Improved**: Operator fixing chỉ áp dụng cho code, không áp dụng cho string content
+
+### ✅ Validation
+- Operators bên ngoài strings vẫn được fix đúng
+- Operators bên trong strings được bảo vệ hoàn toàn
+- Mixed cases (code + strings) hoạt động chính xác
+
 ## [1.8.0] - 2024-12-19
 
 ### 🐛 Major Bug Fixes - Triệt để fix tất cả operator issues

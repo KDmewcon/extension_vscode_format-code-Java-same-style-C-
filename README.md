@@ -211,7 +211,7 @@ Thêm vào `settings.json`:
 ## 📦 Hướng dẫn cài đặt
 
 ### 🎯 Cách 1: Cài từ VSIX file (Khuyến nghị)
-1. **Download** file `dvt-java-formatter-1.8.0.vsix`
+1. **Download** file `dvt-java-formatter-1.9.0.vsix`
 2. **Mở VS Code**
 3. **Nhấn** `Ctrl+Shift+P` (Windows/Linux) hoặc `Cmd+Shift+P` (Mac)
 4. **Gõ** "Extensions: Install from VSIX..."
@@ -283,7 +283,7 @@ Mình là developer **quen với C#** nhưng phải làm **nhiều dự án Java
 ### 📞 Liên hệ & Hỗ trợ
 - **Issues**: Báo lỗi hoặc đề xuất tính năng (welcome!)
 - **Feedback**: Mọi góp ý để cải thiện extension
-- **Version**: 1.8.0
+- **Version**: 1.9.0
 
 ### 💡 Fun Facts
 - Extension này sinh ra từ "nỗi khổ" của một C# developer phải code Java 😅

@@ -290,7 +290,30 @@ function formatJavaWithCSharpStyle(text: string): string {
 }
 
 function cleanupJavaConstruct(line: string): string {
-    // STEP 1: Fix all broken operators FIRST (before any other processing)
+    // STEP 1: Protect string literals and character literals
+    const stringLiterals: string[] = [];
+    let stringIndex = 0;
+
+    console.log('Original line:', JSON.stringify(line));
+
+    // Extract and protect string literals "..." and character literals '...'
+    line = line.replace(/"([^"\\]|\\.)*"/g, (match) => {
+        const placeholder = `___STRING_${stringIndex++}___`;
+        stringLiterals.push(match);
+        console.log(`Protected string: ${match} -> ${placeholder}`);
+        return placeholder;
+    });
+
+    line = line.replace(/'([^'\\]|\\.)*'/g, (match) => {
+        const placeholder = `___STRING_${stringIndex++}___`;
+        stringLiterals.push(match);
+        console.log(`Protected char: ${match} -> ${placeholder}`);
+        return placeholder;
+    });
+
+    console.log('After string protection:', JSON.stringify(line));
+
+    // STEP 2: Fix all broken operators (now safe from strings)
 
     // Fix increment/decrement (HIGHEST PRIORITY - no spaces ever)
     line = line.replace(/(\w+)\s*\+\s*\+\s*/g, '$1++');     // "i + +" or "i ++" -> "i++"
@@ -435,6 +458,18 @@ function cleanupJavaConstruct(line: string): string {
     protectedOps.forEach(([op, placeholder]) => {
         line = line.replace(new RegExp(placeholder, 'g'), op);
     });
+
+    // FINAL STEP: Restore string literals
+    console.log('Before restore:', JSON.stringify(line));
+    console.log('String literals to restore:', stringLiterals);
+
+    stringLiterals.forEach((str, index) => {
+        const placeholder = `___STRING_${index}___`;
+        console.log(`Restoring: ${placeholder} -> ${str}`);
+        line = line.replace(placeholder, str);
+    });
+
+    console.log('Final result:', JSON.stringify(line));
 
     return line.trim();
 }

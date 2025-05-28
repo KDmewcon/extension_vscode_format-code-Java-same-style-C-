@@ -2,7 +2,7 @@
   "name": "dvt-java-formatter",
   "displayName": "Java Formatter Like Style C# DVT-KDMEWCON",
   "description": "Format Java code with C# style braces - preserves imports and libraries",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "publisher": "JavaFormatterLikeStyleCDVT-KDMEWCON",
   "icon": "avatar_about_me_.png",
   "engines": {
