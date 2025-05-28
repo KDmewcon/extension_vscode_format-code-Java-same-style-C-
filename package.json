@@ -2,7 +2,7 @@
   "name": "dvt-java-formatter",
   "displayName": "🔷 DVT Java Formatter",
   "description": "Format Java code with C# style braces - preserves imports and libraries",
-  "version": "1.4.5",
+  "version": "1.5.0",
   "publisher": "dvt-dev",
   "engines": {
     "vscode": "^1.74.0"
@@ -23,6 +23,12 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "languages": [
+      {
+        "id": "java",
+        "extensions": [".java"]
+      }
+    ],
     "commands": [
       {
         "command": "dvt.formatJavaWithCSharpStyle",
@@ -44,6 +50,28 @@
           "group": "1_modification@1"
         }
       ]
+    },
+    "configuration": {
+      "title": "DVT Java Formatter",
+      "properties": {
+        "dvt.autoFormatOnCloseBrace": {
+          "type": "boolean",
+          "default": true,
+          "description": "Tự động format code khi gõ dấu '}'"
+        },
+        "dvt.indentSize": {
+          "type": "number",
+          "default": 4,
+          "minimum": 1,
+          "maximum": 8,
+          "description": "Số spaces cho mỗi mức indentation"
+        },
+        "dvt.allmanBraceStyle": {
+          "type": "boolean",
+          "default": true,
+          "description": "Sử dụng Allman brace style (dấu ngoặc nhọn trên dòng riêng)"
+        }
+      }
     }
   },
   "scripts": {

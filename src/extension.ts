@@ -1,5 +1,72 @@
 import * as vscode from 'vscode';
 
+// Configuration helper
+function getConfig() {
+    const config = vscode.workspace.getConfiguration('dvt');
+    return {
+        autoFormatOnCloseBrace: config.get<boolean>('autoFormatOnCloseBrace', true),
+        indentSize: config.get<number>('indentSize', 4),
+        allmanBraceStyle: config.get<boolean>('allmanBraceStyle', true)
+    };
+}
+
+// Document Formatting Provider
+class DVTJavaFormattingProvider implements vscode.DocumentFormattingEditProvider {
+    provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.TextEdit[] {
+        const fullText = document.getText();
+        const formattedText = formatJavaWithCSharpStyle(fullText);
+
+        const fullRange = new vscode.Range(
+            document.positionAt(0),
+            document.positionAt(fullText.length)
+        );
+
+        return [vscode.TextEdit.replace(fullRange, formattedText)];
+    }
+}
+
+// Range Formatting Provider
+class DVTJavaRangeFormattingProvider implements vscode.DocumentRangeFormattingEditProvider {
+    provideDocumentRangeFormattingEdits(document: vscode.TextDocument, range: vscode.Range): vscode.TextEdit[] {
+        const selectedText = document.getText(range);
+        const formattedText = formatJavaWithCSharpStyle(selectedText);
+
+        return [vscode.TextEdit.replace(range, formattedText)];
+    }
+}
+
+// On Type Formatting Provider (for auto-format on '}')
+class DVTJavaOnTypeFormattingProvider implements vscode.OnTypeFormattingEditProvider {
+    provideOnTypeFormattingEdits(document: vscode.TextDocument, position: vscode.Position, ch: string): vscode.TextEdit[] {
+        const config = getConfig();
+
+        // Only format if auto-format is enabled and character is '}'
+        if (!config.autoFormatOnCloseBrace || ch !== '}') {
+            return [];
+        }
+
+        // Get the current line
+        const line = document.lineAt(position.line);
+        const lineText = line.text;
+
+        // Check if the '}' is the only character on the line (after trimming)
+        if (lineText.trim() === '}') {
+            // Format the entire document
+            const fullText = document.getText();
+            const formattedText = formatJavaWithCSharpStyle(fullText);
+
+            const fullRange = new vscode.Range(
+                document.positionAt(0),
+                document.positionAt(fullText.length)
+            );
+
+            return [vscode.TextEdit.replace(fullRange, formattedText)];
+        }
+
+        return [];
+    }
+}
+
 export function activate(context: vscode.ExtensionContext) {
     console.log('🔷 DVT Java Formatter is now active!');
 
@@ -37,15 +104,41 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-    context.subscriptions.push(formatCommand);
+    // Register formatting providers
+    const javaSelector: vscode.DocumentSelector = { language: 'java', scheme: 'file' };
+
+    const documentFormattingProvider = vscode.languages.registerDocumentFormattingEditProvider(
+        javaSelector,
+        new DVTJavaFormattingProvider()
+    );
+
+    const rangeFormattingProvider = vscode.languages.registerDocumentRangeFormattingEditProvider(
+        javaSelector,
+        new DVTJavaRangeFormattingProvider()
+    );
+
+    const onTypeFormattingProvider = vscode.languages.registerOnTypeFormattingEditProvider(
+        javaSelector,
+        new DVTJavaOnTypeFormattingProvider(),
+        '}' // Trigger character
+    );
+
+    context.subscriptions.push(
+        formatCommand,
+        documentFormattingProvider,
+        rangeFormattingProvider,
+        onTypeFormattingProvider
+    );
 }
 
 function formatJavaWithCSharpStyle(text: string): string {
+    const config = getConfig();
+
     // Split into lines for processing
     let lines = text.split('\n');
     let result: string[] = [];
     let indentLevel = 0;
-    const indentSize = 4;
+    const indentSize = config.indentSize;
 
     for (let i = 0; i < lines.length; i++) {
         let line = lines[i];

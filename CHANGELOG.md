@@ -1,5 +1,28 @@
 # Change Log
 
+## [1.5.0] - 2024-12-19
+
+### ✨ Tính năng mới
+- **Tự động format khi gõ `}`**: Extension sẽ tự động format toàn bộ file khi bạn gõ dấu `}` (có thể bật/tắt)
+- **Format Selection**: Hỗ trợ format chỉ đoạn code được chọn
+- **Cấu hình linh hoạt**: Thêm các settings để tùy chỉnh hành vi
+
+### ⚙️ Cấu hình mới
+- `dvt.autoFormatOnCloseBrace`: Bật/tắt tự động format khi gõ `}` (mặc định: true)
+- `dvt.indentSize`: Cấu hình số spaces cho indentation (mặc định: 4, phạm vi: 1-8)
+- `dvt.allmanBraceStyle`: Bật/tắt Allman brace style (mặc định: true)
+
+### 🔧 Cải tiến kỹ thuật
+- Thêm DocumentFormattingEditProvider cho format toàn bộ file
+- Thêm DocumentRangeFormattingEditProvider cho format selection
+- Thêm OnTypeFormattingEditProvider cho auto-format khi gõ `}`
+- Tối ưu hóa code và tách logic thành các class riêng biệt
+
+### 📚 Cập nhật tài liệu
+- Cập nhật README.md với hướng dẫn chi tiết về các tính năng mới
+- Thêm bảng cấu hình và ví dụ sử dụng
+- Thêm hướng dẫn phát triển và build extension
+
 ## [1.1.0] - 2024-12-19
 
 ### 🔷 DVT Branding
