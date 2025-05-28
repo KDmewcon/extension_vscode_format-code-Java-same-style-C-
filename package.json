@@ -1,0 +1,59 @@
+{
+  "name": "dvt-java-formatter",
+  "displayName": "🔷 DVT Java Formatter",
+  "description": "Format Java code with C# style braces - preserves imports and libraries",
+  "version": "1.4.5",
+  "publisher": "dvt-dev",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Formatters"
+  ],
+  "keywords": [
+    "java",
+    "formatter",
+    "c#",
+    "style",
+    "braces",
+    "dvt"
+  ],
+  "activationEvents": [
+    "onLanguage:java"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "dvt.formatJavaWithCSharpStyle",
+        "title": "🔷 DVT: Format Java with C# Style"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "dvt.formatJavaWithCSharpStyle",
+        "key": "ctrl+shift+alt+f",
+        "when": "editorTextFocus && resourceExtname == '.java'"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "dvt.formatJavaWithCSharpStyle",
+          "when": "resourceExtname == '.java'",
+          "group": "1_modification@1"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.4"
+  }
+}
