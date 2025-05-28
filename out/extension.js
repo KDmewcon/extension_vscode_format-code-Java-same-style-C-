@@ -239,25 +239,75 @@ function formatJavaWithCSharpStyle(text) {
     return result.join('\n');
 }
 function cleanupJavaConstruct(line) {
-    // Clean up spacing in common Java constructs
-    line = line.replace(/\s*,\s*/g, ', '); // Fix spacing around commas
-    line = line.replace(/\s*;\s*/g, ';'); // Fix spacing around semicolons
-    // Fix multi-character operators first to avoid conflicts
-    line = line.replace(/\s*<=\s*/g, ' <= '); // Fix spacing around <=
-    line = line.replace(/\s*>=\s*/g, ' >= '); // Fix spacing around >=
-    line = line.replace(/\s*==\s*/g, ' == '); // Fix spacing around ==
-    line = line.replace(/\s*!=\s*/g, ' != '); // Fix spacing around !=
-    line = line.replace(/\s*&&\s*/g, ' && '); // Fix spacing around &&
-    line = line.replace(/\s*\|\|\s*/g, ' || '); // Fix spacing around ||
-    // Fix single character operators (after multi-character ones)
-    line = line.replace(/\s*=\s*(?!=)/g, ' = '); // Fix spacing around = (but not ==)
-    line = line.replace(/\s*\+\s*/g, ' + '); // Fix spacing around +
-    line = line.replace(/\s*-\s*/g, ' - '); // Fix spacing around -
-    line = line.replace(/\s*\*\s*/g, ' * '); // Fix spacing around *
-    line = line.replace(/\s*\/\s*/g, ' / '); // Fix spacing around /
-    line = line.replace(/\s*!\s*/g, '!'); // Fix spacing around !
-    line = line.replace(/\s*<\s*(?!=)/g, ' < '); // Fix spacing around < (but not <=)
-    line = line.replace(/\s*>\s*(?!=)/g, ' > '); // Fix spacing around > (but not >=)
+    // STEP 1: Fix all broken operators FIRST (before any other processing)
+    // Fix increment/decrement (HIGHEST PRIORITY - no spaces ever)
+    line = line.replace(/(\w+)\s*\+\s*\+\s*/g, '$1++'); // "i + +" or "i ++" -> "i++"
+    line = line.replace(/(\w+)\s*-\s*-\s*/g, '$1--'); // "i - -" or "i --" -> "i--"
+    line = line.replace(/\+\s*\+\s*(\w+)/g, '++$1'); // "+ + i" or "++ i" -> "++i"
+    line = line.replace(/-\s*-\s*(\w+)/g, '--$1'); // "- - i" or "-- i" -> "--i"
+    // Fix shift operators (no spaces)
+    line = line.replace(/>\s*>\s*>/g, '>>>'); // "> > >" -> ">>>"
+    line = line.replace(/>\s*>/g, '>>'); // "> >" -> ">>"
+    line = line.replace(/<\s*</g, '<<'); // "< <" -> "<<"
+    // Fix comments (no spaces)
+    line = line.replace(/\/\s*\//g, '//'); // "/ /" -> "//"
+    // Fix compound assignment operators (with proper spacing)
+    line = line.replace(/(\w+)\s*%\s*=\s*/g, '$1 %= '); // "x % =" -> "x %= "
+    line = line.replace(/(\w+)\s*\+\s*=\s*/g, '$1 += '); // "x + =" -> "x += "
+    line = line.replace(/(\w+)\s*-\s*=\s*/g, '$1 -= '); // "x - =" -> "x -= "
+    line = line.replace(/(\w+)\s*\*\s*=\s*/g, '$1 *= '); // "x * =" -> "x *= "
+    line = line.replace(/(\w+)\s*\/\s*=\s*/g, '$1 /= '); // "x / =" -> "x /= "
+    line = line.replace(/(\w+)\s*&\s*=\s*/g, '$1 &= '); // "x & =" -> "x &= "
+    line = line.replace(/(\w+)\s*\|\s*=\s*/g, '$1 |= '); // "x | =" -> "x |= "
+    line = line.replace(/(\w+)\s*\^\s*=\s*/g, '$1 ^= '); // "x ^ =" -> "x ^= "
+    // Fix comparison operators (with proper spacing)
+    // Handle cases with word before operator
+    line = line.replace(/(\w+)\s*=\s+=\s*/g, '$1 == '); // "value = = " -> "value == "
+    line = line.replace(/(\w+)\s*=\s+=(\w)/g, '$1 == $2'); // "value = =1" -> "value == 1"
+    line = line.replace(/(\w+)\s*!\s+=\s*/g, '$1 != '); // "value ! = " -> "value != "
+    line = line.replace(/(\w+)\s*!\s+=(\w)/g, '$1 != $2'); // "value ! =1" -> "value != 1"
+    line = line.replace(/(\w+)\s*<\s+=\s*/g, '$1 <= '); // "value < = " -> "value <= "
+    line = line.replace(/(\w+)\s*<\s+=(\w)/g, '$1 <= $2'); // "value < =1" -> "value <= 1"
+    line = line.replace(/(\w+)\s*>\s+=\s*/g, '$1 >= '); // "value > = " -> "value >= "
+    line = line.replace(/(\w+)\s*>\s+=(\w)/g, '$1 >= $2'); // "value > =1" -> "value >= 1"
+    // Handle cases without word before operator (like in conditions)
+    line = line.replace(/=\s+=\s*/g, ' == '); // "= = " -> " == "
+    line = line.replace(/=\s+=(\w)/g, ' == $1'); // "= =1" -> " == 1"
+    line = line.replace(/!\s+=\s*/g, ' != '); // "! = " -> " != "
+    line = line.replace(/!\s+=(\w)/g, ' != $1'); // "! =1" -> " != 1"
+    line = line.replace(/<\s+=\s*/g, ' <= '); // "< = " -> " <= "
+    line = line.replace(/<\s+=(\w)/g, ' <= $1'); // "< =1" -> " <= 1"
+    line = line.replace(/>\s+=\s*/g, ' >= '); // "> = " -> " >= "
+    line = line.replace(/>\s+=(\w)/g, ' >= $1'); // "> =1" -> " >= 1"
+    // Fix logical operators
+    line = line.replace(/&\s+&/g, ' && '); // "& &" -> " && "
+    line = line.replace(/\|\s+\|/g, ' || '); // "| |" -> " || "
+    // Fix compound assignment operators
+    line = line.replace(/(\w+)\s*\+\s+=\s*/g, '$1 += '); // "x + = " -> "x += "
+    line = line.replace(/(\w+)\s*\+\s+=(\w)/g, '$1 += $2'); // "x + =5" -> "x += 5"
+    line = line.replace(/(\w+)\s*-\s+=\s*/g, '$1 -= '); // "x - = " -> "x -= "
+    line = line.replace(/(\w+)\s*-\s+=(\w)/g, '$1 -= $2'); // "x - =5" -> "x -= 5"
+    line = line.replace(/(\w+)\s*\*\s+=\s*/g, '$1 *= '); // "x * = " -> "x *= "
+    line = line.replace(/(\w+)\s*\*\s+=(\w)/g, '$1 *= $2'); // "x * =5" -> "x *= 5"
+    line = line.replace(/(\w+)\s*\/\s+=\s*/g, '$1 /= '); // "x / = " -> "x /= "
+    line = line.replace(/(\w+)\s*\/\s+=(\w)/g, '$1 /= $2'); // "x / =5" -> "x /= 5"
+    line = line.replace(/(\w+)\s*%\s+=\s*/g, '$1 %= '); // "x % = " -> "x %= "
+    line = line.replace(/(\w+)\s*%\s+=(\w)/g, '$1 %= $2'); // "x % =5" -> "x %= 5"
+    line = line.replace(/(\w+)\s*&\s+=\s*/g, '$1 &= '); // "x & = " -> "x &= "
+    line = line.replace(/(\w+)\s*&\s+=(\w)/g, '$1 &= $2'); // "x & =5" -> "x &= 5"
+    line = line.replace(/(\w+)\s*\|\s+=\s*/g, '$1 |= '); // "x | = " -> "x |= "
+    line = line.replace(/(\w+)\s*\|\s+=(\w)/g, '$1 |= $2'); // "x | =5" -> "x |= 5"
+    line = line.replace(/(\w+)\s*\^\s+=\s*/g, '$1 ^= '); // "x ^ = " -> "x ^= "
+    line = line.replace(/(\w+)\s*\^\s+=(\w)/g, '$1 ^= $2'); // "x ^ =5" -> "x ^= 5"
+    // Fix method chaining - remove space before dot
+    line = line.replace(/\)\s+\./g, ').'); // ") ." -> ")."
+    line = line.replace(/(\w+)\s+\./g, '$1.'); // "obj ." -> "obj."
+    // Fix cast operators - remove space between ) and variable/method
+    line = line.replace(/\)\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/g, ')$1'); // ") JSONValue" -> ")JSONValue"
+    line = line.replace(/\)\s+([a-zA-Z_$][a-zA-Z0-9_$]*\.[a-zA-Z_$][a-zA-Z0-9_$]*)/g, ')$1'); // ") obj.method" -> ")obj.method"
+    // Fix negative numbers - remove space between - and number (but not for subtraction)
+    line = line.replace(/([=\(,\s])-\s+(\d+)/g, '$1-$2'); // "= - 5" -> "= -5", "( - 5" -> "(-5"
+    line = line.replace(/^-\s+(\d+)/g, '-$1'); // "- 5" at start -> "-5"
     // Fix specific Java constructs - NO SPACE before (
     line = line.replace(/if\s+\(/g, 'if(');
     line = line.replace(/for\s+\(/g, 'for(');
@@ -277,8 +327,43 @@ function cleanupJavaConstruct(line) {
     line = line.replace(/case\s+"([^"]+)"\s*:/g, 'case "$1":');
     line = line.replace(/case\s+'([^']+)'\s*:/g, "case '$1':");
     line = line.replace(/default\s*:/g, 'default:');
+    // FINAL STEP: Clean up spacing around commas and semicolons
+    line = line.replace(/\s*,\s*/g, ', '); // Fix spacing around commas
+    line = line.replace(/\s*;\s*/g, ';'); // Fix spacing around semicolons
+    // Clean up multiple spaces (but preserve our fixed operators)
+    // Protect our operators first
+    const protectedOps = [
+        ['++', '___PLUSPLUS___'],
+        ['--', '___MINUSMINUS___'],
+        ['>>', '___RIGHTSHIFT___'],
+        ['<<', '___LEFTSHIFT___'],
+        ['>>>', '___UNSIGNEDSHIFT___'],
+        ['//', '___COMMENT___'],
+        ['==', '___EQUALS___'],
+        ['!=', '___NOTEQUALS___'],
+        ['<=', '___LESSEQUAL___'],
+        ['>=', '___GREATEREQUAL___'],
+        ['&&', '___AND___'],
+        ['||', '___OR___'],
+        ['+=', '___PLUSEQUAL___'],
+        ['-=', '___MINUSEQUAL___'],
+        ['*=', '___MULTIPLYEQUAL___'],
+        ['/=', '___DIVIDEEQUAL___'],
+        ['%=', '___MODEQUAL___'],
+        ['&=', '___ANDEQUAL___'],
+        ['|=', '___OREQUAL___'],
+        ['^=', '___XOREQUAL___']
+    ];
+    // Protect operators
+    protectedOps.forEach(([op, placeholder]) => {
+        line = line.replace(new RegExp(op.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), placeholder);
+    });
     // Clean up multiple spaces
-    line = line.replace(/\s+/g, ' ');
+    line = line.replace(/\s{2,}/g, ' ');
+    // Restore operators
+    protectedOps.forEach(([op, placeholder]) => {
+        line = line.replace(new RegExp(placeholder, 'g'), op);
+    });
     return line.trim();
 }
 function deactivate() {

@@ -1,5 +1,56 @@
 # Change Log
 
+## [1.8.0] - 2024-12-19
+
+### 🐛 Major Bug Fixes - Triệt để fix tất cả operator issues
+- **FIXED**: `curR % = key.length` → `curR %= key.length` (compound modulo operator)
+- **FIXED**: `size > > 8` → `size >> 8` (shift right operator)
+- **FIXED**: `value < < 2` → `value << 2` (shift left operator)
+- **FIXED**: `0);/ /` → `0);//` (comment operator)
+- **FIXED**: `(JSONArray) JSONValue` → `(JSONArray)JSONValue` (cast operator spacing)
+- **FIXED**: `i ++` → `i++` (increment operator - final fix)
+
+### ✨ New Operator Support
+- **Added**: All compound assignment operators: `%=`, `&=`, `|=`, `^=`
+- **Added**: Shift operators: `>>`, `<<`, `>>>`
+- **Added**: Cast operator spacing fix
+- **Added**: Comment operator `//` fix
+
+### 🔧 Technical Improvements
+- Comprehensive regex patterns for all Java operators
+- Better handling of edge cases with/without word characters
+- Improved operator precedence in processing order
+
+## [1.7.0] - 2024-12-19
+
+### 🐛 Bug Fixes
+- **FIXED**: Operator spacing issues - `i++` không còn bị format thành `i + +`
+- **FIXED**: Comparison operators - `==` không còn bị format thành `= = 1`
+- **FIXED**: Increment/Decrement - `++` và `--` giữ nguyên không có space
+- **FIXED**: Logical operators - `!=` không còn bị format thành `! = d`
+
+### 🔧 Technical Improvements
+- Cải thiện regex logic để xử lý multi-character operators trước
+- Thêm negative lookahead để tránh conflict giữa các operators
+- Tối ưu hóa thứ tự xử lý: `++`, `--`, `==`, `!=` trước, sau đó `+`, `-`, `=`, `!`
+
+### 📝 Documentation
+- Cập nhật README với tone thân thiện, thực tế
+- Thêm phần "Tại sao tạo extension này?" - câu chuyện C# developer phải code Java 😄
+- Bỏ các từ "chuyên nghiệp", "thương hiệu" cho đơn giản
+
+## [1.6.0] - 2024-12-19
+
+### ✨ Tính năng mới
+- **🎨 Custom Icon**: Thêm avatar_about_me_.png làm icon chính thức cho extension
+- **🏷️ Rebranding**: Đổi tên thành "Java Formatter Like Style C# DVT-KDMEWCON"
+- **📝 Complete Documentation**: Viết lại hoàn toàn README với hướng dẫn chi tiết
+
+### 🔧 Cải tiến kỹ thuật
+- **Publisher Update**: Cập nhật publisher ID thành "JavaFormatterLikeStyleCDVT-KDMEWCON"
+- **Command Updates**: Cập nhật tất cả command titles với tên mới
+- **Settings Integration**: Cải thiện integration với VS Code settings
+
 ## [1.6.0] - 2024-12-19
 
 ### ✨ Tính năng mới
