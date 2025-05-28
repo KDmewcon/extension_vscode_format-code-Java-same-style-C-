@@ -2,7 +2,7 @@
   "name": "dvt-java-formatter",
   "displayName": "Java Formatter Like Style C# DVT-KDMEWCON",
   "description": "Format Java code with C# style braces - preserves imports and libraries",
-  "version": "1.9.0",
+  "version": "2.0.0",
   "publisher": "JavaFormatterLikeStyleCDVT-KDMEWCON",
   "icon": "avatar_about_me_.png",
   "engines": {
@@ -32,13 +32,13 @@
     ],
     "commands": [
       {
-        "command": "dvt.formatJavaWithCSharpStyle",
+        "command": "kdmewcon.formatJavaWithCSharpStyle",
         "title": "Java Formatter Like Style C# DVT-KDMEWCON"
       }
     ],
     "keybindings": [
       {
-        "command": "dvt.formatJavaWithCSharpStyle",
+        "command": "kdmewcon.formatJavaWithCSharpStyle",
         "key": "ctrl+shift+alt+f",
         "when": "editorTextFocus && resourceExtname == '.java'"
       }
@@ -46,7 +46,7 @@
     "menus": {
       "editor/context": [
         {
-          "command": "dvt.formatJavaWithCSharpStyle",
+          "command": "kdmewcon.formatJavaWithCSharpStyle",
           "when": "resourceExtname == '.java'",
           "group": "1_modification@1"
         }
@@ -55,19 +55,19 @@
     "configuration": {
       "title": "Java Formatter Like Style C# DVT-KDMEWCON",
       "properties": {
-        "dvt.autoFormatOnCloseBrace": {
+        "kdmewcon.autoFormatOnCloseBrace": {
           "type": "boolean",
           "default": true,
           "description": "Tự động format code khi gõ dấu '}'"
         },
-        "dvt.indentSize": {
+        "kdmewcon.indentSize": {
           "type": "number",
           "default": 4,
           "minimum": 1,
           "maximum": 8,
           "description": "Số spaces cho mỗi mức indentation"
         },
-        "dvt.allmanBraceStyle": {
+        "kdmewcon.allmanBraceStyle": {
           "type": "boolean",
           "default": true,
           "description": "Sử dụng Allman brace style (dấu ngoặc nhọn trên dòng riêng)"

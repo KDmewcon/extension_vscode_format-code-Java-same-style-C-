@@ -27,7 +27,7 @@ exports.deactivate = exports.activate = void 0;
 const vscode = __importStar(require("vscode"));
 // Configuration helper
 function getConfig() {
-    const config = vscode.workspace.getConfiguration('dvt');
+    const config = vscode.workspace.getConfiguration('kdmewcon');
     return {
         autoFormatOnCloseBrace: config.get('autoFormatOnCloseBrace', true),
         indentSize: config.get('indentSize', 4),
@@ -76,7 +76,7 @@ class DVTJavaOnTypeFormattingProvider {
 function activate(context) {
     console.log('Java Formatter Like Style C# DVT-KDMEWCON is now active!');
     // Register the format command
-    let formatCommand = vscode.commands.registerCommand('dvt.formatJavaWithCSharpStyle', () => {
+    let formatCommand = vscode.commands.registerCommand('kdmewcon.formatJavaWithCSharpStyle', () => {
         const editor = vscode.window.activeTextEditor;
         if (!editor) {
             vscode.window.showErrorMessage('No active editor found');

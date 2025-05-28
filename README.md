@@ -139,9 +139,9 @@ Thêm vào `settings.json`:
 
 ```json
 {
-    "dvt.autoFormatOnCloseBrace": true,
-    "dvt.indentSize": 4,
-    "dvt.allmanBraceStyle": true,
+    "kdmewcon.autoFormatOnCloseBrace": true,
+    "kdmewcon.indentSize": 4,
+    "kdmewcon.allmanBraceStyle": true,
     "[java]": {
         "editor.defaultFormatter": "JavaFormatterLikeStyleCDVT-KDMEWCON.dvt-java-formatter",
         "editor.formatOnSave": true,
@@ -154,27 +154,27 @@ Thêm vào `settings.json`:
 
 | Setting | Mô tả | Mặc định | Giá trị có thể | Ví dụ |
 |---------|-------|----------|----------------|-------|
-| `dvt.autoFormatOnCloseBrace` | Tự động format khi gõ dấu `}` | `true` | `true` / `false` | `true` |
-| `dvt.indentSize` | Số spaces cho mỗi mức thụt lề | `4` | `1` đến `8` | `4` |
-| `dvt.allmanBraceStyle` | Sử dụng C# Allman brace style | `true` | `true` / `false` | `true` |
+| `kdmewcon.autoFormatOnCloseBrace` | Tự động format khi gõ dấu `}` | `true` | `true` / `false` | `true` |
+| `kdmewcon.indentSize` | Số spaces cho mỗi mức thụt lề | `4` | `1` đến `8` | `4` |
+| `kdmewcon.allmanBraceStyle` | Sử dụng C# Allman brace style | `true` | `true` / `false` | `true` |
 
 ### 🔧 Các cấu hình mẫu phổ biến
 
 #### ⭐ Cấu hình khuyến nghị (Mặc định):
 ```json
 {
-    "dvt.autoFormatOnCloseBrace": true,
-    "dvt.indentSize": 4,
-    "dvt.allmanBraceStyle": true
+    "kdmewcon.autoFormatOnCloseBrace": true,
+    "kdmewcon.indentSize": 4,
+    "kdmewcon.allmanBraceStyle": true
 }
 ```
 
 #### 🚀 Cấu hình cho người thích tự động hóa:
 ```json
 {
-    "dvt.autoFormatOnCloseBrace": true,
-    "dvt.indentSize": 4,
-    "dvt.allmanBraceStyle": true,
+    "kdmewcon.autoFormatOnCloseBrace": true,
+    "kdmewcon.indentSize": 4,
+    "kdmewcon.allmanBraceStyle": true,
     "[java]": {
         "editor.defaultFormatter": "JavaFormatterLikeStyleCDVT-KDMEWCON.dvt-java-formatter",
         "editor.formatOnSave": true,
@@ -187,18 +187,18 @@ Thêm vào `settings.json`:
 #### 💻 Cấu hình cho team dùng 2 spaces:
 ```json
 {
-    "dvt.autoFormatOnCloseBrace": true,
-    "dvt.indentSize": 2,
-    "dvt.allmanBraceStyle": true
+    "kdmewcon.autoFormatOnCloseBrace": true,
+    "kdmewcon.indentSize": 2,
+    "kdmewcon.allmanBraceStyle": true
 }
 ```
 
 #### 🎯 Cấu hình chỉ format thủ công:
 ```json
 {
-    "dvt.autoFormatOnCloseBrace": false,
-    "dvt.indentSize": 4,
-    "dvt.allmanBraceStyle": true
+    "kdmewcon.autoFormatOnCloseBrace": false,
+    "kdmewcon.indentSize": 4,
+    "kdmewcon.allmanBraceStyle": true
 }
 ```
 
@@ -237,7 +237,7 @@ Thêm vào `settings.json`:
 3. **Kiểm tra** extension đã được enable trong Extensions panel
 
 ### ❌ Không tự động format khi gõ `}`?
-1. **Kiểm tra** setting `dvt.autoFormatOnCloseBrace` = `true`
+1. **Kiểm tra** setting `kdmewcon.autoFormatOnCloseBrace` = `true`
 2. **Đảm bảo** dấu `}` là ký tự duy nhất trên dòng đó
 3. **Kiểm tra** VS Code settings: `editor.formatOnType` = `true`
 
@@ -283,7 +283,7 @@ Mình là developer **quen với C#** nhưng phải làm **nhiều dự án Java
 ### 📞 Liên hệ & Hỗ trợ
 - **Issues**: Báo lỗi hoặc đề xuất tính năng (welcome!)
 - **Feedback**: Mọi góp ý để cải thiện extension
-- **Version**: 1.9.0
+- **Version**: 2.0.0
 
 ### 💡 Fun Facts
 - Extension này sinh ra từ "nỗi khổ" của một C# developer phải code Java 😅
