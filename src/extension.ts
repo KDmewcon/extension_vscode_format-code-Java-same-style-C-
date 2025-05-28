@@ -68,7 +68,7 @@ class DVTJavaOnTypeFormattingProvider implements vscode.OnTypeFormattingEditProv
 }
 
 export function activate(context: vscode.ExtensionContext) {
-    console.log('🔷 DVT Java Formatter is now active!');
+    console.log('Java Formatter Like Style C# DVT-KDMEWCON is now active!');
 
     // Register the format command
     let formatCommand = vscode.commands.registerCommand('dvt.formatJavaWithCSharpStyle', () => {
@@ -97,10 +97,10 @@ export function activate(context: vscode.ExtensionContext) {
             edit.replace(document.uri, fullRange, formattedText);
 
             vscode.workspace.applyEdit(edit).then(() => {
-                vscode.window.showInformationMessage('🔷 DVT: Java code formatted with C# style!');
+                vscode.window.showInformationMessage('Java Formatter Like Style C# DVT-KDMEWCON: Code formatted successfully!');
             });
         } catch (error) {
-            vscode.window.showErrorMessage(`🔷 DVT: Formatting failed: ${error}`);
+            vscode.window.showErrorMessage(`Java Formatter Like Style C# DVT-KDMEWCON: Formatting failed: ${error}`);
         }
     });
 
@@ -342,5 +342,5 @@ function cleanupJavaConstruct(line: string): string {
 }
 
 export function deactivate() {
-    console.log('🔷 DVT Java Formatter deactivated');
+    console.log('Java Formatter Like Style C# DVT-KDMEWCON deactivated');
 }

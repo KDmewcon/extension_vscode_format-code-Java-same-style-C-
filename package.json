@@ -1,9 +1,10 @@
 {
   "name": "dvt-java-formatter",
-  "displayName": "🔷 DVT Java Formatter",
+  "displayName": "Java Formatter Like Style C# DVT-KDMEWCON",
   "description": "Format Java code with C# style braces - preserves imports and libraries",
-  "version": "1.5.0",
-  "publisher": "dvt-dev",
+  "version": "1.6.0",
+  "publisher": "JavaFormatterLikeStyleCDVT-KDMEWCON",
+  "icon": "avatar_about_me_.png",
   "engines": {
     "vscode": "^1.74.0"
   },
@@ -32,7 +33,7 @@
     "commands": [
       {
         "command": "dvt.formatJavaWithCSharpStyle",
-        "title": "🔷 DVT: Format Java with C# Style"
+        "title": "Java Formatter Like Style C# DVT-KDMEWCON"
       }
     ],
     "keybindings": [
@@ -52,7 +53,7 @@
       ]
     },
     "configuration": {
-      "title": "DVT Java Formatter",
+      "title": "Java Formatter Like Style C# DVT-KDMEWCON",
       "properties": {
         "dvt.autoFormatOnCloseBrace": {
           "type": "boolean",

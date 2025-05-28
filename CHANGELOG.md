@@ -1,5 +1,27 @@
 # Change Log
 
+## [1.6.0] - 2024-12-19
+
+### ✨ Tính năng mới
+- **🎨 Custom Icon**: Thêm avatar_about_me_.png làm icon chính thức cho extension
+- **🏷️ Rebranding**: Đổi tên thành "Java Formatter Like Style C# DVT-KDMEWCON"
+- **📝 Complete Documentation**: Viết lại hoàn toàn README với hướng dẫn chi tiết
+
+### 🔧 Cải tiến kỹ thuật
+- **Publisher Update**: Cập nhật publisher ID thành "JavaFormatterLikeStyleCDVT-KDMEWCON"
+- **Command Updates**: Cập nhật tất cả command titles với tên mới
+- **Settings Integration**: Cải thiện integration với VS Code settings
+
+### 📚 Cập nhật tài liệu
+- **Detailed Settings Guide**: Thêm hướng dẫn cấu hình chi tiết với 4 template mẫu
+- **Troubleshooting Section**: Thêm section khắc phục sự cố
+- **Installation Guide**: Hướng dẫn cài đặt step-by-step
+- **Usage Examples**: Ví dụ sử dụng thực tế với code samples
+
+### ✅ Bug Fixes
+- **Default Formatter Issue**: Khắc phục hoàn toàn vấn đề "Configure Default Formatter"
+- **Publisher ID Mismatch**: Sửa lỗi publisher ID không khớp khi publish
+
 ## [1.5.0] - 2024-12-19
 
 ### ✨ Tính năng mới

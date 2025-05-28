@@ -1,34 +1,46 @@
-# 🔷 DVT Java Formatter
+# Java Formatter Like Style C# DVT-KDMEWCON
 
-Extension VS Code của DVT để format code Java với style C# mà vẫn giữ nguyên syntax Java.
+## 😅 Tại sao tạo extension này?
 
-## ✨ Tính năng
+Đơn giản là mình **quen với C# rồi** nhưng phải **làm nhiều dự án Java** 😂
 
-### 🔷 DVT Signature
-- **Thương hiệu DVT**: Extension chuyên nghiệp với logo DVT
-- **Chất lượng cao**: Được phát triển bởi đội ngũ DVT
+Mình thích style format của C# (dấu `{` xuống dòng riêng) hơn style mặc định của Java (dấu `{` cùng dòng). Thế nên tạo extension này để format Java code theo style C# cho dễ nhìn!
 
-### 🔄 Format Brace Style (Chỉ format, không convert)
-- **Java (K&R Style)**: Dấu ngoặc nhọn mở cùng dòng
-- **C# (Allman Style)**: Dấu ngoặc nhọn mở trên dòng riêng
-- **✅ Giữ nguyên Java syntax**: package, import, System.out.println
+## 🎯 Extension này làm gì?
 
-**Trước:**
+### ✨ Chức năng chính
+- **🔄 Tự động format khi gõ `}`**: Gõ xong dấu `}` là code tự động đẹp luôn
+- **🎨 Chuyển từ Java style sang C# style**: Dấu `{` xuống dòng riêng như C#
+- **✅ Giữ nguyên 100% Java syntax**: Không động vào package, import, method calls
+- **⚙️ Tùy chỉnh được**: Bật/tắt auto-format, đổi indent size
+
+### 🤷‍♂️ Tại sao không dùng formatter có sẵn?
+- Các formatter khác phức tạp quá, mình chỉ muốn đổi style dấu ngoặc thôi
+- Muốn có control hoàn toàn về cách format
+- Làm cho vui, học thêm về VS Code extension 😄
+
+## 📋 Ví dụ trước và sau khi format
+
+### ⬅️ Trước khi format (Java K&R Style):
 ```java
 package com.example;
 import java.util.List;
 
 public class Example {
     public void method() {
-        System.out.println("Hello");
+        System.out.println("Hello World");
         if (condition) {
-            // code
+            for (int i = 0; i < 10; i++) {
+                System.out.println(i);
+            }
+        } else {
+            System.out.println("Else block");
         }
     }
 }
 ```
 
-**Sau:**
+### ➡️ Sau khi format (C# Allman Style):
 ```java
 package com.example;
 import java.util.List;
@@ -37,44 +49,45 @@ public class Example
 {
     public void method()
     {
-        System.out.println("Hello");
+        System.out.println("Hello World");
         if (condition)
         {
-            // code
+            for (int i = 0; i < 10; i++)
+            {
+                System.out.println(i);
+            }
+        }
+        else
+        {
+            System.out.println("Else block");
         }
     }
 }
 ```
 
-## 🚀 Cách sử dụng
+> **Lưu ý**: Package, import và tất cả Java syntax được giữ nguyên 100%!
 
-### 1. Format toàn bộ file
-- **Phím tắt**: `Ctrl+Shift+Alt+F`
-- **Menu**: Right-click → "🔷 DVT: Format Java with C# Style"
-- **Command Palette**: `Ctrl+Shift+P` → "🔷 DVT: Format Java with C# Style"
+## 🚀 Hướng dẫn sử dụng chi tiết
 
-### 2. Format selection (đoạn code được chọn)
-- Chọn đoạn code trong file Java
-- **Phím tắt**: `Shift+Alt+F` (VS Code default format selection)
-- **Menu**: Right-click → "Format Selection"
+### 🎯 Cách 1: Tự động format khi gõ `}` (Khuyến nghị)
+**Đây là tính năng độc đáo của Java Formatter Like Style C# DVT-KDMEWCON!**
 
-### 3. ✨ Tự động format khi gõ `}`
-- **Tính năng mới**: Tự động format code khi bạn gõ dấu `}`
-- **Điều kiện**: Dấu `}` phải là ký tự duy nhất trên dòng đó
-- **Cấu hình**: Có thể bật/tắt trong settings (mặc định: bật)
+1. **Mở file Java** bất kỳ trong VS Code
+2. **Gõ code bình thường** theo style Java thông thường
+3. **Khi gõ dấu `}`** trên một dòng riêng → Code tự động format ngay lập tức!
 
-**Ví dụ tự động format:**
+**Ví dụ thực tế:**
 ```java
-// Khi bạn gõ:
+// Bạn gõ code như thế này:
 public class Test {
 public void method() {
 if(true) {
 System.out.println("Hello");
-}  // ← Khi gõ } ở đây, toàn bộ file sẽ được format tự động
+}  // ← Ngay khi gõ dấu } này...
 }
 }
 
-// Kết quả sau khi gõ }:
+// Kết quả tự động xuất hiện:
 public class Test
 {
     public void method()
@@ -82,21 +95,72 @@ public class Test
         if(true)
         {
             System.out.println("Hello");
-        }
+        }  // ← Code đã được format!
     }
 }
 ```
 
-## ⚙️ Cấu hình
+### ⚡ Cách 2: Format thủ công
 
-Truy cập settings qua `File > Preferences > Settings` và tìm "DVT Java Formatter":
+#### 📄 Format toàn bộ file:
+- **Phím tắt**: `Ctrl+Shift+Alt+F`
+- **Hoặc**: Right-click → "Java Formatter Like Style C# DVT-KDMEWCON"
+- **Hoặc**: `Ctrl+Shift+P` → Gõ "Java Formatter" → Chọn "Java Formatter Like Style C# DVT-KDMEWCON"
 
-### Cách cấu hình:
-1. **Qua VS Code Settings UI**:
-   - `Ctrl+,` → Tìm "DVT Java Formatter"
-   - Hoặc `File > Preferences > Settings` → Tìm "DVT"
+#### 📝 Format đoạn code được chọn:
+1. **Bôi đen** đoạn code cần format
+2. **Nhấn** `Shift+Alt+F` (VS Code default format selection)
+3. **Hoặc**: Right-click → "Format Selection"
 
-2. **Qua settings.json**:
+### 🔧 Cách 3: Thiết lập format tự động khi save
+Thêm vào `settings.json`:
+```json
+{
+    "[java]": {
+        "editor.defaultFormatter": "JavaFormatterLikeStyleCDVT-KDMEWCON.dvt-java-formatter",
+        "editor.formatOnSave": true
+    }
+}
+```
+
+## ⚙️ Cấu hình chi tiết
+
+### 🎛️ Cách mở Settings
+
+#### Cách 1: Qua VS Code Settings UI (Dễ nhất)
+1. **Nhấn** `Ctrl + ,` (Windows/Linux) hoặc `Cmd + ,` (Mac)
+2. **Tìm kiếm** "Java Formatter Like Style C# DVT-KDMEWCON"
+3. **Điều chỉnh** các setting theo ý muốn
+
+#### Cách 2: Qua settings.json (Cho người dùng nâng cao)
+1. **Nhấn** `Ctrl + Shift + P`
+2. **Gõ** "Preferences: Open Settings (JSON)"
+3. **Thêm** cấu hình vào file:
+
+```json
+{
+    "dvt.autoFormatOnCloseBrace": true,
+    "dvt.indentSize": 4,
+    "dvt.allmanBraceStyle": true,
+    "[java]": {
+        "editor.defaultFormatter": "JavaFormatterLikeStyleCDVT-KDMEWCON.dvt-java-formatter",
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true
+    }
+}
+```
+
+### 📊 Bảng cấu hình chi tiết
+
+| Setting | Mô tả | Mặc định | Giá trị có thể | Ví dụ |
+|---------|-------|----------|----------------|-------|
+| `dvt.autoFormatOnCloseBrace` | Tự động format khi gõ dấu `}` | `true` | `true` / `false` | `true` |
+| `dvt.indentSize` | Số spaces cho mỗi mức thụt lề | `4` | `1` đến `8` | `4` |
+| `dvt.allmanBraceStyle` | Sử dụng C# Allman brace style | `true` | `true` / `false` | `true` |
+
+### 🔧 Các cấu hình mẫu phổ biến
+
+#### ⭐ Cấu hình khuyến nghị (Mặc định):
 ```json
 {
     "dvt.autoFormatOnCloseBrace": true,
@@ -105,66 +169,131 @@ Truy cập settings qua `File > Preferences > Settings` và tìm "DVT Java Forma
 }
 ```
 
-### Các tùy chọn:
-
-| Setting | Mô tả | Mặc định | Giá trị |
-|---------|-------|----------|---------|
-| `dvt.autoFormatOnCloseBrace` | Tự động format khi gõ `}` | `true` | `true/false` |
-| `dvt.indentSize` | Số spaces cho mỗi mức indentation | `4` | `1-8` |
-| `dvt.allmanBraceStyle` | Sử dụng Allman brace style | `true` | `true/false` |
-
-### Ví dụ cấu hình:
+#### 🚀 Cấu hình cho người thích tự động hóa:
 ```json
-// Tắt auto-format, dùng 2 spaces
 {
-    "dvt.autoFormatOnCloseBrace": false,
+    "dvt.autoFormatOnCloseBrace": true,
+    "dvt.indentSize": 4,
+    "dvt.allmanBraceStyle": true,
+    "[java]": {
+        "editor.defaultFormatter": "JavaFormatterLikeStyleCDVT-KDMEWCON.dvt-java-formatter",
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.formatOnPaste": true
+    }
+}
+```
+
+#### 💻 Cấu hình cho team dùng 2 spaces:
+```json
+{
+    "dvt.autoFormatOnCloseBrace": true,
     "dvt.indentSize": 2,
     "dvt.allmanBraceStyle": true
 }
 ```
 
-## 📋 Yêu cầu
+#### 🎯 Cấu hình chỉ format thủ công:
+```json
+{
+    "dvt.autoFormatOnCloseBrace": false,
+    "dvt.indentSize": 4,
+    "dvt.allmanBraceStyle": true
+}
+```
 
-- Visual Studio Code 1.74.0 trở lên
-- Files Java (.java extension)
+## 📋 Yêu cầu hệ thống
 
-## 📦 Cài đặt
+- **VS Code**: Phiên bản 1.74.0 trở lên
+- **File type**: Chỉ hoạt động với file Java (`.java`)
+- **OS**: Windows, macOS, Linux
 
-### Cách 1: Từ VSIX file
-1. Download file `dvt-java-formatter-1.4.5.vsix`
-2. Mở VS Code
-3. Nhấn `Ctrl+Shift+P`
-4. Gõ "Extensions: Install from VSIX..."
-5. Chọn file đã download
+## 📦 Hướng dẫn cài đặt
 
-### Cách 2: Từ VS Code Marketplace
-1. Mở VS Code
-2. Nhấn `Ctrl+Shift+X` (Extensions)
-3. Tìm "DVT Java Formatter"
-4. Click "Install"
+### 🎯 Cách 1: Cài từ VSIX file (Khuyến nghị)
+1. **Download** file `dvt-java-formatter-1.6.0.vsix`
+2. **Mở VS Code**
+3. **Nhấn** `Ctrl+Shift+P` (Windows/Linux) hoặc `Cmd+Shift+P` (Mac)
+4. **Gõ** "Extensions: Install from VSIX..."
+5. **Chọn** file VSIX đã download
+6. **Restart** VS Code để extension hoạt động
 
-## 🔧 Phát triển và Build
+### 🌐 Cách 2: Từ VS Code Marketplace (Nếu có)
+1. **Mở VS Code**
+2. **Nhấn** `Ctrl+Shift+X` để mở Extensions
+3. **Tìm kiếm** "Java Formatter Like Style C# DVT-KDMEWCON"
+4. **Click** "Install"
 
-### Yêu cầu:
-- Node.js 16+
-- TypeScript
+### ✅ Kiểm tra cài đặt thành công
+1. **Mở** một file `.java` bất kỳ
+2. **Right-click** → Bạn sẽ thấy "Java Formatter Like Style C# DVT-KDMEWCON"
+3. **Hoặc** gõ dấu `}` trên một dòng riêng → Code sẽ tự động format
+
+## 🛠️ Troubleshooting (Khắc phục sự cố)
+
+### ❌ Extension không hoạt động?
+1. **Kiểm tra** file có đuôi `.java` không
+2. **Restart** VS Code
+3. **Kiểm tra** extension đã được enable trong Extensions panel
+
+### ❌ Không tự động format khi gõ `}`?
+1. **Kiểm tra** setting `dvt.autoFormatOnCloseBrace` = `true`
+2. **Đảm bảo** dấu `}` là ký tự duy nhất trên dòng đó
+3. **Kiểm tra** VS Code settings: `editor.formatOnType` = `true`
+
+### ❌ VS Code hiện "Configure Default Formatter"?
+Thêm vào `settings.json`:
+```json
+{
+    "[java]": {
+        "editor.defaultFormatter": "JavaFormatterLikeStyleCDVT-KDMEWCON.dvt-java-formatter"
+    }
+}
+```
+
+## 🔧 Dành cho Developer
+
+### Yêu cầu phát triển:
+- **Node.js** 16+
+- **TypeScript** 4.9+
+- **VS Code Extension API** 1.74+
 
 ### Build extension:
 ```bash
+# Cài đặt dependencies
 npm install
+
+# Compile TypeScript
 npm run compile
+
+# Package extension
+npx vsce package
 ```
 
-### Package extension:
+### Test extension:
 ```bash
-npm install -g vsce
-vsce package
+# Mở trong Extension Development Host
+F5 trong VS Code
 ```
 
-## 🔷 Về DVT
+## 🤝 Về tác giả
 
-DVT cam kết cung cấp các công cụ phát triển chất lượng cao.
+Mình là developer **quen với C#** nhưng phải làm **nhiều dự án Java**. Thấy style format của Java không quen nên tạo extension này để format theo style C# cho dễ nhìn.
+
+### 📞 Liên hệ & Hỗ trợ
+- **Issues**: Báo lỗi hoặc đề xuất tính năng (welcome!)
+- **Feedback**: Mọi góp ý để cải thiện extension
+- **Version**: 1.6.0
+
+### 💡 Fun Facts
+- Extension này sinh ra từ "nỗi khổ" của một C# developer phải code Java 😅
+- Mục tiêu: Làm cho Java code nhìn "quen mắt" hơn với người quen C#
+- Đơn giản, hiệu quả, không phức tạp!
 
 ## 📄 License
 
-MIT
+MIT License - Sử dụng tự do cho mọi mục đích
+
+---
+
+**Java Formatter Like Style C# DVT-KDMEWCON** - *Vì C# developer cũng phải code Java!* 😄✨

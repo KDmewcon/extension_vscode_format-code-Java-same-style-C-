@@ -74,7 +74,7 @@ class DVTJavaOnTypeFormattingProvider {
     }
 }
 function activate(context) {
-    console.log('🔷 DVT Java Formatter is now active!');
+    console.log('Java Formatter Like Style C# DVT-KDMEWCON is now active!');
     // Register the format command
     let formatCommand = vscode.commands.registerCommand('dvt.formatJavaWithCSharpStyle', () => {
         const editor = vscode.window.activeTextEditor;
@@ -94,11 +94,11 @@ function activate(context) {
             const fullRange = new vscode.Range(document.positionAt(0), document.positionAt(fullText.length));
             edit.replace(document.uri, fullRange, formattedText);
             vscode.workspace.applyEdit(edit).then(() => {
-                vscode.window.showInformationMessage('🔷 DVT: Java code formatted with C# style!');
+                vscode.window.showInformationMessage('Java Formatter Like Style C# DVT-KDMEWCON: Code formatted successfully!');
             });
         }
         catch (error) {
-            vscode.window.showErrorMessage(`🔷 DVT: Formatting failed: ${error}`);
+            vscode.window.showErrorMessage(`Java Formatter Like Style C# DVT-KDMEWCON: Formatting failed: ${error}`);
         }
     });
     // Register formatting providers
@@ -282,7 +282,7 @@ function cleanupJavaConstruct(line) {
     return line.trim();
 }
 function deactivate() {
-    console.log('🔷 DVT Java Formatter deactivated');
+    console.log('Java Formatter Like Style C# DVT-KDMEWCON deactivated');
 }
 exports.deactivate = deactivate;
 //# sourceMappingURL=extension.js.map
